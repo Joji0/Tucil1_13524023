@@ -379,7 +379,7 @@ int main() {
         Text tit(f, "QUEENS SOLVER", 24);
         tit.setPosition({20.f, 20.f});
         tit.setStyle(Text::Bold);
-        Text nm(f, "CP Style - 1500 Rating", 12);
+        Text nm(f, "Made by Jonathan Kris Wicaksono - 13524023", 12);
         nm.setPosition({20.f, 50.f});
         nm.setFillColor(C_SUB);
         Text l_f(f, "File:", 14);

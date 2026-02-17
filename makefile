@@ -1,7 +1,7 @@
 CXX      := g++
 CXXFLAGS := -std=c++17 -O3 -Wall
 TARGET   := main
-SRC      := main.cpp
+SRC      := src/main.cpp
 
 ifeq ($(OS),Windows_NT)
     SFML_DIR := lib/SFML
