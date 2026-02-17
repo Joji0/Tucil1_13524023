@@ -9,7 +9,7 @@ ifeq ($(OS),Windows_NT)
     LDFLAGS  := -L$(SFML_DIR)/lib -lsfml-graphics -lsfml-window -lsfml-system
     EXE := $(TARGET).exe
     CLEAN_CMD := del /q $(TARGET).exe *.o 2>NUL
-    COPY_DLL := xcopy /y /i "$(SFML_DIR)\bin\*.dll" .
+    COPY_DLL := copy /y "$(SFML_DIR)\bin\*.dll" . >NUL 2>&1 || echo DLLs copied
 else
     UNAME_S := $(shell uname -s)
     EXE := $(TARGET)

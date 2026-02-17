@@ -21,8 +21,8 @@
 using namespace std;
 using namespace sf;
 
-const uint W_WIDTH = 1100;
-const uint W_HEIGHT = 750;
+const unsigned int W_WIDTH = 1100;
+const unsigned int W_HEIGHT = 750;
 const Color C_BG(30, 30, 30);
 const Color C_PANEL(44, 62, 80);
 const Color C_BTN(52, 73, 94);
@@ -50,8 +50,8 @@ string get_file_dialog(bool save) {
         string res = "";
         char buf[128];
 #ifdef _WIN32
-        cmd =
-            "powershell -command \"Add-Type -AssemblyName System.Windows.Forms; $f = New-Object System.Windows.Forms.";
+        cmd = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -command \"Add-Type -AssemblyName "
+              "System.Windows.Forms; $f = New-Object System.Windows.Forms.";
         cmd += (save ? "SaveFileDialog" : "OpenFileDialog");
         cmd += "; $f.Filter = '";
         cmd += (save ? "PNG Image (*.png)|*.png" : "Text Files (*.txt)|*.txt|All Files (*.*)|*.*");
@@ -200,7 +200,7 @@ void draw(RenderTarget &t, float w, float h, float sx, float sy) {
         float oy = sy + (h - fh) / 2.0f;
         for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
-                        RectangleShape cell({sz - 2.f, sz - 2.f});
+                        RectangleShape cell(Vector2f(sz - 2.f, sz - 2.f));
                         cell.setPosition({ox + j * sz + 1.f, oy + i * sz + 1.f});
                         cell.setFillColor(get_col(grid[i][j]));
                         t.draw(cell);
@@ -361,11 +361,11 @@ struct Sld {
         }
 };
 int main() {
-        RenderWindow w(VideoMode({W_WIDTH, W_HEIGHT}), "Queens Solver");
+        RenderWindow w(VideoMode(Vector2u(W_WIDTH, W_HEIGHT)), "Queens Solver");
         w.setFramerateLimit(60);
         Font f;
-        if (!f.openFromFile("/System/Library/Fonts/Supplemental/Arial.ttf") &&
-            !f.openFromFile("C:/Windows/Fonts/arial.ttf") && !f.openFromFile("font.ttf")) {
+        if (!f.openFromFile("C:/Windows/Fonts/arial.ttf") &&
+            !f.openFromFile("/System/Library/Fonts/Supplemental/Arial.ttf") && !f.openFromFile("font.ttf")) {
         }
         vector<string> p_tex = {"queen.png", "src/queen.png"};
         for (auto &p : p_tex)
@@ -374,7 +374,7 @@ int main() {
                         q_tex.setSmooth(true);
                         break;
                 }
-        RectangleShape pn({300.f, (float)W_HEIGHT});
+        RectangleShape pn(Vector2f(300.f, (float)W_HEIGHT));
         pn.setFillColor(C_PANEL);
         Text tit(f, "QUEENS SOLVER", 24);
         tit.setPosition({20.f, 20.f});
