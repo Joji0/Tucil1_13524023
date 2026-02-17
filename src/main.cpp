@@ -420,7 +420,8 @@ int main() {
   RenderWindow w(VideoMode(Vector2u(W_WIDTH, W_HEIGHT)), "Queens Solver");
   w.setFramerateLimit(60);
   Font f;
-  if (!f.openFromFile("C:/Windows/Fonts/arial.ttf") &&
+  if (!f.openFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf") &&
+      !f.openFromFile("C:/Windows/Fonts/arial.ttf") &&
       !f.openFromFile("/System/Library/Fonts/Supplemental/Arial.ttf") && !f.openFromFile("font.ttf")) {
   }
   vector<string> p_tex = {"queen.png", "src/queen.png"};
