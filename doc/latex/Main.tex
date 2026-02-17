@@ -1,0 +1,49 @@
+\documentclass[a4paper,10pt,oneside]{book} 
+\usepackage{CS_report}
+\usepackage[T1]{fontenc}   
+
+\makeatletter
+\pretocmd{\tableofcontents}{\hypersetup{linkcolor=black}}{}{}
+\makeatother
+\captionsetup[figure]{margin=1.5cm,font=small,name={Gambar},labelsep=colon}
+\captionsetup[table]{margin=1.5cm,font=small,name={Tabel},labelsep=colon}
+
+\begin{document}
+
+    \frontmatter
+    
+    \begin{titlepage}
+        \begin{center}
+            
+            \vspace{5cm}
+            {\LARGE \textbf{Laporan Tugas Kecil 1}}\\[0.5cm]
+            {\Large IF2211 \textsc{Strategi Algoritma}}\\[0.2cm]
+            {\large Penyelesaian Permainan Queens Linkedin}\\[0.2cm]
+            {\normalsize Semester II Tahun 2025/2026}\\[1.5cm]
+
+            \includegraphics[width=14cm]{img/cover.png}\\[2cm]
+            
+            \Large{Jonathan Kris Wicaksono}\\
+            \Large{13524023}\\
+            \vspace{2cm}
+
+            {\normalsize 
+            Laboratorium Ilmu dan Rekayasa Komputasi\\
+            Program Studi Teknik Informatika\\
+            Sekolah Teknik Elektro dan Informatika\\
+            Institut Teknologi Bandung}\\[0.3cm]
+    
+        \end{center}
+    \end{titlepage}
+    
+    \tableofcontents
+    \listoftables
+    \listoffigures
+    
+    \mainmatter
+    \input{chapters/01_Implementasi}
+    \input{chapters/02_Source Code}
+    \input{chapters/03_Pengujian}
+    \input{chapters/lampiran}
+    \input{chapters/pernyataan}
+\end{document}

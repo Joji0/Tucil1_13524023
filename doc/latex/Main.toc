@@ -1,0 +1,13 @@
+\contentsline {chapter}{Daftar Tabel}{ii}{chapter*.2}%
+\contentsline {chapter}{Daftar Gambar}{iii}{chapter*.3}%
+\contentsline {chapter}{\numberline {1}Implementasi Algoritma}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Algoritma Brute Force}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Fitur Tambahan Program}{2}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Source Code}{3}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Pengujian}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Test 1: Papan berukuran $9\times 9$ (in1.txt)}{12}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Test 2: Papan berukuran $11\times 11$ (in2.txt)}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Test 3: Papan berukuran $1\times 1$ (in3.txt)}{14}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Test 4: Papan berukuran $9\times 9$ --- Tidak Ada Solusi (in4.txt)}{15}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Test 5: Input Tidak Valid --- Panjang Baris Berbeda (in5.txt)}{16}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Lampiran}{18}{chapter.4}%

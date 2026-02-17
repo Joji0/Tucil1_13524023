@@ -1,0 +1,75 @@
+\chapter{Implementasi Algoritma}
+
+Dalam permainan Queens LinkedIn, tujuannya adalah menempatkan satu \textit{queen} pada setiap baris di papan berukuran $N \times M$ yang terbagi menjadi daerah warna, dengan syarat: tepat satu queen pada setiap baris, kolom, dan daerah warna, serta tidak boleh ada dua queen yang saling bersebelahan (termasuk diagonal). Program ini ditulis dalam bahasa C++ dengan GUI menggunakan library SFML 3.0 dan mengimplementasikan algoritma Brute Force.
+
+\section{Algoritma Brute Force}
+
+Algoritma \textit{brute force} yang diimplementasikan bersifat murni, yaitu mengenumerasi seluruh kemungkinan penempatan queen tanpa heuristik apapun.
+
+Berikut adalah langkah-langkah detail dari algoritma brute force yang diimplementasikan pada fungsi \texttt{solve\_bf()}:
+
+\begin{enumerate}
+    \item Program menerima masukan berupa \textit{grid} berukuran $N \times M$ yang dibaca dari file \texttt{.txt}. Setiap huruf pada grid merepresentasikan daerah warna.
+    \item Dibuat sebuah \textit{array} \texttt{curr} berukuran $N$, diinisialisasi dengan $[0, 0, \dots, 0]$. Elemen \texttt{curr[i]} menyatakan kolom tempat queen diletakkan pada baris ke-$i$.
+    \item Untuk setiap konfigurasi \texttt{curr}, dilakukan validasi terhadap seluruh syarat permainan:
+    \begin{itemize}
+        \item \textbf{Syarat kolom}: Tidak boleh ada dua queen pada kolom yang sama, diperiksa dengan membandingkan \texttt{curr[i]} terhadap \texttt{curr[prev]} untuk seluruh baris sebelumnya.
+        \item \textbf{Syarat warna}: Tidak boleh ada dua queen pada daerah warna yang sama, diperiksa dengan membandingkan \texttt{grid[i][curr[i]]} terhadap \texttt{grid[prev][curr[prev]]}.
+        \item \textbf{Syarat adjacency}: Queen pada baris berurutan tidak boleh berada pada kolom yang bersebelahan, diperiksa dengan kondisi $|curr[i] - curr[i-1]| \leq 1$.
+    \end{itemize}
+    \item Jika seluruh syarat terpenuhi, konfigurasi disimpan sebagai solusi.
+    \item Jika tidak valid, konfigurasi di-\textit{increment}: \texttt{curr[N-1]} dinaikkan 1; jika melebihi $M$, di-\textit{reset} ke 0 dan \texttt{curr[N-2]} dinaikkan, dan seterusnya.
+    \item Proses berulang hingga solusi ditemukan atau seluruh $M^N$ konfigurasi habis diperiksa.
+\end{enumerate}
+
+Algoritma ini memiliki kompleksitas waktu \textbf{$O(M^N \cdot N)$} karena setiap konfigurasi memerlukan $O(N)$ untuk validasi.
+
+\begin{algorithm}[H]
+\caption{Algoritma Brute Force Queens}
+\begin{algorithmic}[1]
+\Procedure{SolveBruteForce}{$grid, N, M$}
+    \State $curr \gets [0, 0, \dots, 0]$ \Comment{Array berukuran $N$}
+    \While{\textbf{true}}
+        \State $iter \gets iter + 1$
+        \State $valid \gets$ \textbf{true}
+        \For{$i \gets 0$ \textbf{to} $N-1$}
+            \State $c \gets curr[i]$
+            \If{$c \geq M$} $valid \gets$ \textbf{false}; \textbf{break} \EndIf
+            \For{$prev \gets 0$ \textbf{to} $i-1$}
+                \If{$curr[prev] = c$} $valid \gets$ \textbf{false}; \textbf{break} \EndIf \Comment{Kolom sama}
+                \If{$grid[prev][curr[prev]] = grid[i][c]$} $valid \gets$ \textbf{false}; \textbf{break} \EndIf \Comment{Warna sama}
+            \EndFor
+            \If{$i > 0$ \textbf{and} $|c - curr[i-1]| \leq 1$} $valid \gets$ \textbf{false}; \textbf{break} \EndIf \Comment{Adjacency}
+        \EndFor
+        \If{$valid$} \Return $curr$ \Comment{Solusi ditemukan}
+        \EndIf
+        \State \Comment{Increment ke konfigurasi berikutnya}
+        \State $idx \gets N - 1$
+        \While{$idx \geq 0$}
+            \State $curr[idx] \gets curr[idx] + 1$
+            \If{$curr[idx] < M$} \textbf{break} \EndIf
+            \State $curr[idx] \gets 0$; $idx \gets idx - 1$
+        \EndWhile
+        \If{$idx < 0$} \Return \texttt{None} \Comment{Tidak ada solusi}
+        \EndIf
+    \EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\section{Fitur Tambahan Program}
+
+Selain algoritma pencarian, program juga mengimplementasikan:
+
+\begin{enumerate}
+    \item \textbf{GUI (SFML 3.0)}: Panel kontrol dengan tombol-tombol interaktif (BROWSE, LOAD, SOLVE, STOP, SAVE TXT, SAVE IMG), pemilihan algoritma, dan slider kecepatan visualisasi.
+    \item \textbf{Live Visualization}: Setiap iterasi pencarian divisualisasikan secara \textit{real-time} pada papan GUI. Kecepatan dapat diatur melalui slider (TURBO / FAST / SLOW).
+    \item \textbf{Validasi Input}: Program memverifikasi:
+    \begin{itemize}
+        \item Seluruh baris memiliki panjang yang sama
+        \item Karakter hanya boleh berupa huruf A--Z
+        \item Jumlah region warna unik harus sama dengan jumlah baris ($N$)
+    \end{itemize}
+    \item \textbf{Output as Text}: Solusi dapat disimpan sebagai file \texttt{.txt} melalui tombol SAVE TXT, lengkap dengan waktu pencarian dan jumlah iterasi.
+    \item \textbf{Output as Image}: Solusi dapat disimpan sebagai file PNG melalui tombol SAVE IMG.
+\end{enumerate}
