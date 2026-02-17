@@ -422,7 +422,6 @@ int main() {
                                                         if (in) {
                                                                 string l;
                                                                 grid.clear();
-                                                                int mx = 0;
                                                                 while (getline(in, l)) {
                                                                         l.erase(remove(l.begin(), l.end(), '\r'),
                                                                                 l.end());
@@ -432,14 +431,19 @@ int main() {
                                                                                 l.end());
                                                                         if (l.empty()) continue;
                                                                         grid.push_back(l);
-                                                                        if ((int)l.length() > mx) mx = l.length();
                                                                 }
                                                                 n = grid.size();
-                                                                m = mx;
-                                                                for (auto &s : grid)
-                                                                        if ((int)s.length() < m)
-                                                                                s.append(m - s.length(), ' ');
-                                                                if (n > 0 && m > 0) {
+                                                                bool valid = (n > 0);
+                                                                if (valid) {
+                                                                        m = grid[0].length();
+                                                                        for (int i = 1; i < n; i++) {
+                                                                                if ((int)grid[i].length() != m) {
+                                                                                        valid = false;
+                                                                                        break;
+                                                                                }
+                                                                        }
+                                                                }
+                                                                if (valid && m > 0) {
                                                                         ans.assign(n, -1);
                                                                         found = false;
                                                                         iter = 0;
@@ -447,6 +451,13 @@ int main() {
                                                                         st.setString("Loaded " + to_string(n) + "x" +
                                                                                      to_string(m));
                                                                         st.setFillColor(Color::White);
+                                                                } else {
+                                                                        st.setString("Invalid board:\nRows must have "
+                                                                                     "equal length");
+                                                                        st.setFillColor(Color::Red);
+                                                                        grid.clear();
+                                                                        n = 0;
+                                                                        m = 0;
                                                                 }
                                                         } else {
                                                                 st.setString("File error");
