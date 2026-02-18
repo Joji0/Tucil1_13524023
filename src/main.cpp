@@ -447,7 +447,7 @@ int main() {
   Text l_m(f, "Algo:", 14);
   l_m.setPosition({20.f, 250.f});
   Btn b_m1({260.f, 30.f}, {20.f, 275.f}, "Brute Force", f);
-  Btn b_m2({260.f, 30.f}, {20.f, 315.f}, "Backtrack", f);
+  Btn b_m2({260.f, 30.f}, {20.f, 315.f}, "Optimize", f);
   b_m2.a = true;
   Sld sld({20.f, 390.f}, 260.f, 0.f, 300000.f, f);
   Btn b_run({260.f, 50.f}, {20.f, 440.f}, "SOLVE", f, C_BTN_A);
